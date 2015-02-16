@@ -77,7 +77,7 @@ function init!(mdutils::Array{CuModule}, devlist)
         # allocate and destroy memory to force initialization
         free(malloc(Uint8, 1))
         # Load the utility functions
-        mdutils[idev] = CuModule(utilfile, false)
+        mdutils[idev] = CuModule(ASCIIString(utilfile), false)
         for func in funcnames
             for i = 1:length(funcexts)
                 ptxdict[(dev, func, datatypes[i])] = CuFunction(mdutils[idev], func*"_"*funcexts[i])
